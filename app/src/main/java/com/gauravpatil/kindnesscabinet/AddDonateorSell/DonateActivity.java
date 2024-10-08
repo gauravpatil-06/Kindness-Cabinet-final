@@ -349,3 +349,4 @@ public class DonateActivity extends AppCompatActivity {
         finish();
     }
 }/* update */
+/* update */
