@@ -1,5 +1,4 @@
 package com.gauravpatil.kindnesscabinet.Admin.AddUser;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-
 import com.gauravpatil.kindnesscabinet.Admin.HomeAdminActivity;
 import com.gauravpatil.kindnesscabinet.Comman.Urls;
 import com.gauravpatil.kindnesscabinet.R;
@@ -27,14 +24,10 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.concurrent.TimeUnit;
-
 import cz.msebera.android.httpclient.Header;
-
 public class VerifyOTPActivity1 extends AppCompatActivity
 {
     TextView tvMobileNo,tvResentOTP;
@@ -42,13 +35,11 @@ public class VerifyOTPActivity1 extends AppCompatActivity
     AppCompatButton btnVerify;
     ProgressDialog progressDialog;
     private String strVerificationCode,strName,strMobileNo,strEnailID,strGender,strAge,strAddress,strUsername,strPassword;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_otpactivity);
-
         tvMobileNo  = findViewById(R.id.tvVerifyOTPMobileNo);
         tvResentOTP  = findViewById(R.id.tvVerifyOTPResentOTP);
         etInputCode1 = findViewById(R.id.etVerifyOTPInputCode1);
@@ -58,7 +49,6 @@ public class VerifyOTPActivity1 extends AppCompatActivity
         etInputCode5 = findViewById(R.id.etVerifyOTPInputCode5);
         etInputCode6 = findViewById(R.id.etVerifyOTPInputCode6);
         btnVerify    = findViewById(R.id.btnVerifyOTPVerify);
-
         strVerificationCode = getIntent().getStringExtra("verificationcode");
         strName = getIntent().getStringExtra("name");
         strMobileNo = getIntent().getStringExtra("mobile_no");
@@ -68,7 +58,6 @@ public class VerifyOTPActivity1 extends AppCompatActivity
         strAddress = getIntent().getStringExtra("address");
         strUsername = getIntent().getStringExtra("username");
         strPassword = getIntent().getStringExtra("password");
-
         btnVerify.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -83,11 +72,9 @@ public class VerifyOTPActivity1 extends AppCompatActivity
                 {
                     Toast.makeText(VerifyOTPActivity1.this, "Please Enter Valid OTP", Toast.LENGTH_LONG).show();
                 }
-
                 String otpCode = etInputCode1.getText().toString() + etInputCode2.getText().toString() +
                         etInputCode3.getText().toString() + etInputCode4.getText().toString() +
                         etInputCode5.getText().toString() + etInputCode6.getText().toString();
-
                 if(strVerificationCode != null)
                 {
                     progressDialog = new ProgressDialog(VerifyOTPActivity1.this);
@@ -95,9 +82,7 @@ public class VerifyOTPActivity1 extends AppCompatActivity
                     progressDialog.setMessage("Please Wait...");
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.show();
-
                     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(strVerificationCode,otpCode);
-
                     FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential).
                             addOnCompleteListener(new OnCompleteListener<AuthResult>()
                             {
@@ -119,7 +104,6 @@ public class VerifyOTPActivity1 extends AppCompatActivity
                 }
             }
         });
-
         tvResentOTP.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -145,16 +129,13 @@ public class VerifyOTPActivity1 extends AppCompatActivity
                 });
             }
         });
-
         setUpInputOTP();
     }
-
     private void userRigistrationDetails()
     {
         //Client and Server Communication over network data transfer or manipulate
         AsyncHttpClient client = new AsyncHttpClient(); //Client and Server Communication
         RequestParams params = new RequestParams(); // Put the data
-
         params.put("name",strName);
         params.put("mobile_no",strMobileNo);
         params.put("email_id",strEnailID);
@@ -163,7 +144,6 @@ public class VerifyOTPActivity1 extends AppCompatActivity
         params.put("address",strAddress);
         params.put("username",strUsername);
         params.put("password",strPassword);
-
         client.post(Urls.userRegister,params,
                 new JsonHttpResponseHandler()
                 {
@@ -192,7 +172,6 @@ public class VerifyOTPActivity1 extends AppCompatActivity
                             throw new RuntimeException(e);
                         }
                     }
-
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
                     {
@@ -202,7 +181,6 @@ public class VerifyOTPActivity1 extends AppCompatActivity
                     }
                 });
     }
-
     private void setUpInputOTP()
     {
         etInputCode1.addTextChangedListener(new TextWatcher()
@@ -210,7 +188,6 @@ public class VerifyOTPActivity1 extends AppCompatActivity
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
@@ -223,16 +200,13 @@ public class VerifyOTPActivity1 extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable s)
             {
-
             }
         });
-
         etInputCode2.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
@@ -245,16 +219,13 @@ public class VerifyOTPActivity1 extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable s)
             {
-
             }
         });
-
         etInputCode3.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
@@ -267,16 +238,13 @@ public class VerifyOTPActivity1 extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable s)
             {
-
             }
         });
-
         etInputCode4.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
@@ -289,16 +257,13 @@ public class VerifyOTPActivity1 extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable s)
             {
-
             }
         });
-
         etInputCode5.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
@@ -311,7 +276,6 @@ public class VerifyOTPActivity1 extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable s)
             {
-
             }
         });
     }

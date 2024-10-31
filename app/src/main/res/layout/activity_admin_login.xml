@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
     android:background="@drawable/background_admin">
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cvLogin"
         android:layout_width="match_parent"
@@ -19,7 +18,6 @@
         android:layout_marginTop="280dp"
         android:layout_marginRight="16sp"
         android:layout_marginLeft="16sp">
-
         <TextView
             android:id="@+id/tvLoginTitle"
             android:layout_width="match_parent"
@@ -31,13 +29,11 @@
             android:textStyle="bold"
             android:fontFamily="@font/aldrich"
             android:layout_marginTop="20sp" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70sp"
             android:orientation="vertical">
-
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,7 +43,6 @@
                 app:boxStrokeColor="@color/blue"
                 app:hintTextColor="@color/black"
                 app:boxStrokeWidth="2sp" >
-
                 <EditText
                     android:id="@+id/etLoginusername"
                     android:layout_width="match_parent"
@@ -61,9 +56,7 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-
             </com.google.android.material.textfield.TextInputLayout>
-
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,7 +69,6 @@
                 app:passwordToggleTint="#80000000"
                 app:passwordToggleDrawable="@drawable/password_toggle"
                 app:boxStrokeWidth="2sp" >
-
                 <EditText
                     android:id="@+id/etLoginPassword"
                     android:layout_width="match_parent"
@@ -90,9 +82,7 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-
             </com.google.android.material.textfield.TextInputLayout>
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLoginLogin"
                 android:layout_width="match_parent"
@@ -107,10 +97,6 @@
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
-
-
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
 </RelativeLayout>

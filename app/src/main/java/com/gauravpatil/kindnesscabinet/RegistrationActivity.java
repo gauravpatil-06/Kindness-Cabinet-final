@@ -1,5 +1,4 @@
 package com.gauravpatil.kindnesscabinet;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,19 +12,16 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.concurrent.TimeUnit;
-
 public class RegistrationActivity extends AppCompatActivity
 {
     EditText etName,etMobileNo,etEmailid,etAddress,etGender,etAge,etUsername,etPassword,etConfirmPassword;
     Button btnRegister;
     ProgressDialog progressDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-
         etName = findViewById(R.id.etRegisterName);
         etEmailid = findViewById(R.id.etRegisterEmailId);
         etMobileNo = findViewById(R.id.etRegisterMobileNo);
@@ -36,7 +32,6 @@ public class RegistrationActivity extends AppCompatActivity
         etPassword = findViewById(R.id.etRegisterPassword);
         etConfirmPassword = findViewById(R.id.etRegisterConfirmPassword);
         btnRegister = findViewById(R.id.btnRegisterRegister);
-
         btnRegister.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -169,14 +164,12 @@ public class RegistrationActivity extends AppCompatActivity
                     progressDialog.setMessage("Registration is in Progress...");
                     progressDialog.setCanceledOnTouchOutside(true);
                     progressDialog.show();
-
 //                  Verify Mobile No
 //                  arg 1 => Jya mobile no varti OTP receive karaycha aahe
 //                  arg 2 => 60
 //                  arg 3 => TimeUnit
 //                  arg 4 => Current Java Activity
 //                  args 5 => call Back
-
                     PhoneAuthProvider.getInstance().verifyPhoneNumber("+91" + etMobileNo.getText().toString(), 60, TimeUnit.SECONDS, RegistrationActivity.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks()
                     {
                         @Override

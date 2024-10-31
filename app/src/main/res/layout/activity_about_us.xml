@@ -7,13 +7,11 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     android:background="@color/white">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal">
-
         <!-- Main CardView -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -27,14 +25,12 @@
             android:layout_marginRight="15dp"
             app:cardBackgroundColor="#653C3C"
             android:backgroundTint="#F4EEEE">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/card_corner_color"
                 android:gravity="center_horizontal">
-
                 <!-- Logo -->
                 <ImageView
                     android:layout_width="100dp"
@@ -44,7 +40,6 @@
                     android:layout_marginBottom="16dp"
                     android:layout_marginTop="10dp"
                     android:elevation="8dp"/>
-
                 <!-- App Name & Tagline -->
                 <TextView
                     android:layout_width="wrap_content"
@@ -55,7 +50,6 @@
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:layout_marginBottom="4dp"/>
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -65,7 +59,6 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:layout_marginBottom="16dp"/>
-
                 <!-- About Section -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -73,13 +66,11 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:padding="8dp">
-
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/information"
                         android:layout_marginEnd="12dp"/>
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -87,7 +78,6 @@
                         android:textSize="14sp"
                         android:textColor="@color/gray"/>
                 </LinearLayout>
-
                 <!-- Mission Section -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -95,13 +85,11 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:padding="8dp">
-
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/earth"
                         android:layout_marginEnd="12dp"/>
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -109,7 +97,6 @@
                         android:textSize="14sp"
                         android:textColor="@color/gray"/>
                 </LinearLayout>
-
                 <!-- Contact Section -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -117,18 +104,15 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:padding="8dp">
-
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/email"
                         android:layout_marginEnd="10dp"/>
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-
                         <TextView
                             android:id="@+id/tvEmail"
                             android:layout_width="350dp"
@@ -140,7 +124,6 @@
                             android:linksClickable="true"
                             android:textColor="@color/blue"
                             android:layout_marginBottom="4dp"/>
-
                         <TextView
                             android:id="@+id/tvWebsite"
                             android:layout_width="wrap_content"
@@ -152,15 +135,9 @@
                             android:autoLink="web"
                             android:linksClickable="true"
                             android:textColor="@color/blue"/>
-
                     </LinearLayout>
-
                 </LinearLayout>
-
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
-
     </LinearLayout>
-
 </ScrollView>

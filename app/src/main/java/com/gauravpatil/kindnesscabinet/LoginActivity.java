@@ -1,5 +1,4 @@
 package com.gauravpatil.kindnesscabinet;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-
 import com.gauravpatil.kindnesscabinet.Admin.AdminLoginActivity;
 import com.gauravpatil.kindnesscabinet.java_classes.NetworkChangeListener;
 import com.gauravpatil.kindnesscabinet.Comman.Urls;
@@ -32,12 +30,9 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import cz.msebera.android.httpclient.Header;
-
 public class LoginActivity extends AppCompatActivity
 {
-
     private Handler handler = new Handler();
     private boolean isPressed = false;
     private Runnable runnable;
@@ -49,18 +44,14 @@ public class LoginActivity extends AppCompatActivity
     NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     GoogleSignInOptions googleSignInOptions; //Show option of gmail
     GoogleSignInClient googleSignInClient;  //Selected gmail option store
-
     SharedPreferences preferences; // Store temporary data within app
     SharedPreferences.Editor editor; // edit or put the Temporary dada in SharedPreferences
-
 //  GoogleSignInOption => GoogleSignIn => GoogleSignInClient => GoogleSignIn => GoogleSignInAccount (name,email,photo)000
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         ivAdmin = findViewById(R.id.ivLoginAdmin);
         etUsername = findViewById(R.id.etLoginusername);
         etPassword = findViewById(R.id.etLoginPassword);
@@ -68,20 +59,15 @@ public class LoginActivity extends AppCompatActivity
         btnLogin = findViewById(R.id.btnLoginLogin);
         tvSignUp = findViewById(R.id.tvLoginNewUser);
         btnGogleSignIn = findViewById(R.id.btnLoginGoogleWithSignUp);
-
         preferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
         editor= preferences.edit();
-
         if(preferences.getBoolean("islogin",false))
         {
             startActivity(new Intent(LoginActivity.this,HomeActivity.class));
             finish();
         }
-
-
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         googleSignInClient = GoogleSignIn.getClient(LoginActivity.this,googleSignInOptions);
-
         ivAdmin.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -100,7 +86,6 @@ public class LoginActivity extends AppCompatActivity
                         };
                         handler.postDelayed(runnable, 3000); // 3 seconds delay
                         break;
-
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
                         isPressed = false;
@@ -110,7 +95,6 @@ public class LoginActivity extends AppCompatActivity
                 return true;
             }
         });
-
         tvForgetPassword.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -120,7 +104,6 @@ public class LoginActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-
         btnLogin.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -165,12 +148,10 @@ public class LoginActivity extends AppCompatActivity
                     progressDialog.setMessage("Login in Progress...");
                     progressDialog.setCanceledOnTouchOutside(true);
                     progressDialog.show();
-
                     userlogin();
                 }
             }
         });
-
         tvSignUp.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -180,7 +161,6 @@ public class LoginActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-
         btnGogleSignIn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -190,13 +170,11 @@ public class LoginActivity extends AppCompatActivity
             }
         });
     }
-
     private void signIn()
     {
         Intent intent = googleSignInClient.getSignInIntent();
         startActivityForResult(intent,999);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
     {
@@ -217,7 +195,6 @@ public class LoginActivity extends AppCompatActivity
             }
         }
     }
-
     @Override
     protected void onStart()
     {
@@ -225,7 +202,6 @@ public class LoginActivity extends AppCompatActivity
         IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(networkChangeListener,intentFilter);
     }
-
     @Override
     protected void onStop()
     {
@@ -237,10 +213,8 @@ public class LoginActivity extends AppCompatActivity
         //Client and Server Communication over network data transfer or manipulate
         AsyncHttpClient client = new AsyncHttpClient(); //Client and Server Communication
         RequestParams params = new RequestParams();
-
         params.put("username",etUsername.getText().toString());
         params.put("password",etPassword.getText().toString());
-
         client.post(Urls.userLogin,params,
                 new JsonHttpResponseHandler()
                 {
@@ -274,7 +248,6 @@ public class LoginActivity extends AppCompatActivity
                             throw new RuntimeException(e);
                         }
                     }
-
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
                     {

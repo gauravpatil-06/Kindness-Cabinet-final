@@ -1,5 +1,4 @@
 package com.gauravpatil.kindnesscabinet.Favorites;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,55 +9,44 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.gauravpatil.kindnesscabinet.Comman.Urls;
 import com.gauravpatil.kindnesscabinet.History.MoreDetailsAllHistory;
 import com.gauravpatil.kindnesscabinet.History.POJOGetAllHistory;
 import com.gauravpatil.kindnesscabinet.R;
-
 import java.util.List;
-
 public class AdapterGetAllFavourite extends BaseAdapter
 {
     // BaseAdapter => multiple view load show
     // AdapterGetAllCategoryDetails => show multiple view collect show ListView
-
     List<POJOGetAllFavourite> pojoGetAllFavourites;
     Activity activity;
-
     public AdapterGetAllFavourite(List<POJOGetAllFavourite> pojoGetAllFavourites,
                                   Activity activity)
     {
         this.pojoGetAllFavourites = pojoGetAllFavourites;
         this.activity = activity;
     }
-
-
     @Override
     public int getCount()
     {
         return pojoGetAllFavourites.size();
     }
-
     @Override
     public Object getItem(int position)
     {
         return pojoGetAllFavourites.get(position);
     }
-
     @Override
     public long getItemId(int position)
     {
         return position;
     }
-
     @Override
     public View getView(int position, View view, ViewGroup parent)
     {
         final ViewHolder holder;
         LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-
         if(view == null)
         {
             holder = new ViewHolder();
@@ -68,18 +56,15 @@ public class AdapterGetAllFavourite extends BaseAdapter
             holder.tvFavouriteCategoryName = view.findViewById(R.id.tvFavouriteCategoryName);
             holder.tvFavouriteProductName = view.findViewById(R.id.tvFavouriteProductName);
             holder.btnAllFavouriteViewDetails = view.findViewById(R.id.btnAllFavouriteViewDetails);
-
             view.setTag(holder);
         }
         else
         {
             holder =(ViewHolder) view.getTag();
         }
-
         final POJOGetAllFavourite obj = pojoGetAllFavourites.get(position);
         holder.tvFavouriteCategoryName.setText(obj.getProduct_category());
         holder.tvFavouriteProductName.setText(obj.getProduct_name());
-
         if (obj.getRole().equals("Doner")) {
             holder.tvRole.setTextColor(Color.GREEN);
             holder.tvRole.setText(obj.getRole());
@@ -87,13 +72,11 @@ public class AdapterGetAllFavourite extends BaseAdapter
             holder.tvRole.setTextColor(Color.RED);
             holder.tvRole.setText(obj.getRole());
         }
-
         Glide.with(activity)
                 .load(Urls.image +obj.getProduct_image())
                 .skipMemoryCache(true)
                 .error(R.drawable.image_not_found)
                 .into(holder.ivFavouriteProductCategoryImage);
-
         holder.btnAllFavouriteViewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,14 +97,12 @@ public class AdapterGetAllFavourite extends BaseAdapter
                 activity.startActivity(intent1);
             }
         });
-
         return view;
     }
     class  ViewHolder
     {
         ImageView ivFavouriteProductCategoryImage;
         TextView tvRole,tvFavouriteCategoryName,tvFavouriteProductName;
-
         Button btnAllFavouriteViewDetails;
     }
 }

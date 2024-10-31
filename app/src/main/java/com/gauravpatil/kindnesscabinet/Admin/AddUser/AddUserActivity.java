@@ -1,5 +1,4 @@
 package com.gauravpatil.kindnesscabinet.Admin.AddUser;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,25 +6,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.gauravpatil.kindnesscabinet.R;
 import com.gauravpatil.kindnesscabinet.VerifyOTPActivity;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-
 import java.util.concurrent.TimeUnit;
-
 public class AddUserActivity extends AppCompatActivity {
-
     EditText etName,etMobileNo,etEmailid,etAddress,etGender,etAge,etUsername,etPassword,etConfirmPassword;
     Button btnRegister;
     ProgressDialog progressDialog;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +32,6 @@ public class AddUserActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etRegisterPassword);
         etConfirmPassword = findViewById(R.id.etRegisterConfirmPassword);
         btnRegister = findViewById(R.id.btnRegisterRegister);
-
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,14 +101,12 @@ public class AddUserActivity extends AppCompatActivity {
                     progressDialog.setMessage("Add User is in Progress...");
                     progressDialog.setCanceledOnTouchOutside(true);
                     progressDialog.show();
-
 //                  Verify Mobile No
 //                  arg 1 => Jya mobile no varti OTP receive karaycha aahe
 //                  arg 2 => 60
 //                  arg 3 => TimeUnit
 //                  arg 4 => Current Java Activity
 //                  args 5 => call Back
-
                     PhoneAuthProvider.getInstance().verifyPhoneNumber("+91" + etMobileNo.getText().toString(), 60,
                             TimeUnit.SECONDS, AddUserActivity.this,
                             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -126,13 +115,11 @@ public class AddUserActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             Toast.makeText(AddUserActivity.this, "Registration Completed", Toast.LENGTH_LONG).show();
                         }
-
                         @Override
                         public void onVerificationFailed(@NonNull FirebaseException e) {
                             progressDialog.dismiss();
                             Toast.makeText(AddUserActivity.this, "Registration Failed", Toast.LENGTH_LONG).show();
                         }
-
                         @Override
                         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                             Intent intent = new Intent(AddUserActivity.this, VerifyOTPActivity1.class);

@@ -7,7 +7,6 @@
     android:orientation="vertical"
     android:background="@color/white"
     tools:context=".Admin.AllUser.AllUserActivity">
-
     <!-- Search View -->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/svAdminAllUserSearchUser"
@@ -20,14 +19,12 @@
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/darker_gray"
         app:iconTint="@android:color/black"/>
-
     <!-- List View -->
     <ListView
         android:id="@+id/lvAdminAllUserAllUser"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"/>
-
     <!-- No Category Available Text -->
     <TextView
         android:id="@+id/tvAdminAllUserNoUserAvailable"
@@ -41,5 +38,4 @@
         android:fontFamily="@font/aldrich"
         android:layout_marginTop="10dp"
         android:visibility="gone"/>
-
 </LinearLayout>

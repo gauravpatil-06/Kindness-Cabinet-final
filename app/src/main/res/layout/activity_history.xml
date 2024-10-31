@@ -6,7 +6,6 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:layout_marginTop="10sp">
-
     <!-- Search View -->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/svAdminAllHistory"
@@ -19,14 +18,11 @@
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/darker_gray"
         app:iconTint="@android:color/black"/>
-
-
     <ListView
         android:id="@+id/lvHistroy"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
-
     <TextView
         android:id="@+id/tvNoHistoryAvailable"
         android:layout_width="match_parent"

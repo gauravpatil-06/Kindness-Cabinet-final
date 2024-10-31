@@ -12,7 +12,6 @@ public class Urls
     public static String forgetpassword = webService + "userforgetpassword.php";
     public static String myDetails = webService + "mydetails.php";
     public static String getDonerSalerCategoryDetails = webService + "doner_saler_tbl.php";
-
     public static String image = webService + "images/";
     public static String getAllCategoryDetails = webService + "getAllCategoryDetails.php";
     public static String addFeedback = webService + "feedback.php";

@@ -1,5 +1,4 @@
 package com.gauravpatil.kindnesscabinet.Admin.AllUser;
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,9 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
-
 import com.bumptech.glide.Glide;
 import com.gauravpatil.kindnesscabinet.Admin.HomeAdminActivity;
 import com.gauravpatil.kindnesscabinet.Comman.Urls;
@@ -25,54 +22,42 @@ import com.gauravpatil.kindnesscabinet.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.List;
-
 import cz.msebera.android.httpclient.Header;
-
 public class AdapterGetAllUserDetails extends BaseAdapter
 {
     // BaseAdapter => multiple view load show
     // AdapterGetAllCategoryDetails => show multiple view collect show ListView
-
     List<POJOGetAllUserDetails> pojoGetAllUserDetails;
     Activity activity;
-
     public AdapterGetAllUserDetails(List<POJOGetAllUserDetails> pojoGetAllUserDetails,
                                     Activity activity)
     {
         this.pojoGetAllUserDetails = pojoGetAllUserDetails;
         this.activity = activity;
     }
-
-
     @Override
     public int getCount()
     {
         return pojoGetAllUserDetails.size();
     }
-
     @Override
     public Object getItem(int position)
     {
         return pojoGetAllUserDetails.get(position);
     }
-
     @Override
     public long getItemId(int position)
     {
         return position;
     }
-
     @Override
     public View getView(int position, View view, ViewGroup parent)
     {
         final ViewHolder holder;
         LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-
         if(view == null)
         {
             holder = new ViewHolder();
@@ -86,14 +71,12 @@ public class AdapterGetAllUserDetails extends BaseAdapter
             holder.tvAddress = view.findViewById(R.id.etProfileAddress);
             holder.tvUsername = view.findViewById(R.id.etProfileUsername);
             holder.btnDeleteUser = view.findViewById(R.id.btnProfileDeleteUser);
-
             view.setTag(holder);
         }
         else
         {
             holder =(ViewHolder) view.getTag();
         }
-
         final POJOGetAllUserDetails obj = pojoGetAllUserDetails.get(position);
         holder.tvName.setText(obj.getName());
         holder.tvMobileNo.setText(obj.getMobileNo());
@@ -102,13 +85,11 @@ public class AdapterGetAllUserDetails extends BaseAdapter
         holder.tvAge.setText(obj.getAge());
         holder.tvAddress.setText(obj.getAddress());
         holder.tvUsername.setText(obj.getUsername());
-
         Glide.with(activity)
                 .load(Urls.image +obj.getImage())
                 .skipMemoryCache(true)
                 .error(R.drawable.image_not_found)
                 .into(holder.ivUserImage);
-
         holder.btnDeleteUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,17 +108,13 @@ public class AdapterGetAllUserDetails extends BaseAdapter
                                 deleteUser(Integer.parseInt(obj.getId()));
                             }
                         });
-
                 AlertDialog alertDialog = ad.create();
                 alertDialog.show();
                 alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.darker_gray);
             }
         });
-
-
         return view;
     }
-
     private void deleteUser(int userid) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
@@ -149,19 +126,16 @@ public class AdapterGetAllUserDetails extends BaseAdapter
                 super.onSuccess(statusCode, headers, response);
                 try {
                     String aa = response.getString("success");
-
                     if (aa.equals("1")) {
                         Intent intent = new Intent(activity, HomeAdminActivity.class);
                         activity.startActivity(intent);
                     } else {
                         Toast.makeText(activity, "Unable to delete User", Toast.LENGTH_SHORT).show();
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable
                     , JSONObject errorResponse) {
@@ -169,12 +143,10 @@ public class AdapterGetAllUserDetails extends BaseAdapter
             }
         });
     }
-
     class  ViewHolder
     {
         ImageView ivUserImage;
         TextView tvName,tvMobileNo,tvEmailid,tvGender,tvAge,tvAddress,tvUsername;
-
         Button btnDeleteUser;
     }
 }

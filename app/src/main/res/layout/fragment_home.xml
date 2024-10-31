@@ -6,7 +6,6 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:layout_marginTop="10dp">
-
     <!-- Search View -->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/svCategoryFragmentSearchProductName"
@@ -19,13 +18,11 @@
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/darker_gray"
         app:iconTint="@android:color/black"/>
-
     <ListView
         android:id="@+id/lvDonateSaleCategoryFragmentShowMultipleCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:nestedScrollingEnabled="true"/>
-
     <TextView
         android:id="@+id/tvDonateSaleCategoryFragmentNoCategoryAvailable"
         android:layout_width="match_parent"
@@ -38,5 +35,4 @@
         android:textStyle="bold"
         android:fontFamily="@font/aldrich"
         android:visibility="gone"/>
-
 </LinearLayout>

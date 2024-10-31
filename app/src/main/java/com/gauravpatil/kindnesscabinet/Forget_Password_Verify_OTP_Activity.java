@@ -1,5 +1,4 @@
 package com.gauravpatil.kindnesscabinet;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +15,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -28,14 +25,10 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.concurrent.TimeUnit;
-
 import cz.msebera.android.httpclient.Header;
-
 public class Forget_Password_Verify_OTP_Activity extends AppCompatActivity
 {
     TextView tvMobileNo,tvResentOTP;
@@ -43,13 +36,11 @@ public class Forget_Password_Verify_OTP_Activity extends AppCompatActivity
     AppCompatButton btnVerify;
     ProgressDialog progressDialog;
     private String strVerificationCode,strMobileNo;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_otpactivity);
-
         tvMobileNo  = findViewById(R.id.tvVerifyOTPMobileNo);
         tvResentOTP  = findViewById(R.id.tvVerifyOTPResentOTP);
         etInputCode1 = findViewById(R.id.etVerifyOTPInputCode1);
@@ -59,10 +50,8 @@ public class Forget_Password_Verify_OTP_Activity extends AppCompatActivity
         etInputCode5 = findViewById(R.id.etVerifyOTPInputCode5);
         etInputCode6 = findViewById(R.id.etVerifyOTPInputCode6);
         btnVerify    = findViewById(R.id.btnVerifyOTPVerify);
-
         strVerificationCode = getIntent().getStringExtra("verificationcode");
         strMobileNo = getIntent().getStringExtra("mobileno");
-
         btnVerify.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -77,11 +66,9 @@ public class Forget_Password_Verify_OTP_Activity extends AppCompatActivity
                 {
                     Toast.makeText(Forget_Password_Verify_OTP_Activity.this, "Please Enter Valid OTP", Toast.LENGTH_LONG).show();
                 }
-
                 String otpCode = etInputCode1.getText().toString() + etInputCode2.getText().toString() +
                         etInputCode3.getText().toString() + etInputCode4.getText().toString() +
                         etInputCode5.getText().toString() + etInputCode6.getText().toString();
-
                 if(strVerificationCode != null)
                 {
                     progressDialog = new ProgressDialog(Forget_Password_Verify_OTP_Activity.this);
@@ -89,9 +76,7 @@ public class Forget_Password_Verify_OTP_Activity extends AppCompatActivity
                     progressDialog.setMessage("Please Wait...");
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.show();
-
                     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(strVerificationCode,otpCode);
-
                     FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential).
                             addOnCompleteListener(new OnCompleteListener<AuthResult>()
                             {
@@ -115,7 +100,6 @@ public class Forget_Password_Verify_OTP_Activity extends AppCompatActivity
                 }
             }
         });
-
         tvResentOTP.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -141,7 +125,6 @@ public class Forget_Password_Verify_OTP_Activity extends AppCompatActivity
                 });
             }
         });
-
         setUpInputOTP();
     }
     private void setUpInputOTP()
@@ -151,7 +134,6 @@ public class Forget_Password_Verify_OTP_Activity extends AppCompatActivity
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
@@ -164,16 +146,13 @@ public class Forget_Password_Verify_OTP_Activity extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable s)
             {
-
             }
         });
-
         etInputCode2.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
@@ -186,16 +165,13 @@ public class Forget_Password_Verify_OTP_Activity extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable s)
             {
-
             }
         });
-
         etInputCode3.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
@@ -208,16 +184,13 @@ public class Forget_Password_Verify_OTP_Activity extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable s)
             {
-
             }
         });
-
         etInputCode4.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
@@ -230,16 +203,13 @@ public class Forget_Password_Verify_OTP_Activity extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable s)
             {
-
             }
         });
-
         etInputCode5.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
@@ -252,7 +222,6 @@ public class Forget_Password_Verify_OTP_Activity extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable s)
             {
-
             }
         });
     }

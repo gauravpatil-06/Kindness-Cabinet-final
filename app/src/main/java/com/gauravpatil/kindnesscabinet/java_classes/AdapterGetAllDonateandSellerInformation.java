@@ -1,5 +1,4 @@
 package com.gauravpatil.kindnesscabinet.java_classes;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,54 +9,43 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.gauravpatil.kindnesscabinet.Comman.Urls;
 import com.gauravpatil.kindnesscabinet.MoreDetailsAllDonateandSellerInformationActivity;
 import com.gauravpatil.kindnesscabinet.R;
-
 import java.util.List;
-
 public class AdapterGetAllDonateandSellerInformation extends BaseAdapter
 {
     // BaseAdapter => multiple view load show
     // AdapterGetAllCategoryDetails => show multiple view collect show ListView
-
     List<POJOGetAllDonateandSellerInformation> pojoGetAllDonateandSellerInformations;
     Activity activity;
-
     public AdapterGetAllDonateandSellerInformation(List<POJOGetAllDonateandSellerInformation> pojoGetAllDonateandSellerInformations,
                                                    Activity activity)
     {
         this.pojoGetAllDonateandSellerInformations = pojoGetAllDonateandSellerInformations;
         this.activity = activity;
     }
-
-
     @Override
     public int getCount()
     {
         return pojoGetAllDonateandSellerInformations.size();
     }
-
     @Override
     public Object getItem(int position)
     {
         return pojoGetAllDonateandSellerInformations.get(position);
     }
-
     @Override
     public long getItemId(int position)
     {
         return position;
     }
-
     @Override
     public View getView(int position, View view, ViewGroup parent)
     {
         final ViewHolder holder;
         LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-
         if(view == null)
         {
             holder = new ViewHolder();
@@ -68,19 +56,16 @@ public class AdapterGetAllDonateandSellerInformation extends BaseAdapter
             holder.tvHomeProductName = view.findViewById(R.id.tvHomeProductName);
             holder.tvHomeCategoryName = view.findViewById(R.id.tvHomeCategoryName);
             holder.btnAllDonateandSellerInformationViewDetails = view.findViewById(R.id.btnAllDonateandSellerInformationViewDetails);
-
             view.setTag(holder);
         }
         else
         {
             holder =(ViewHolder) view.getTag();
         }
-
         final POJOGetAllDonateandSellerInformation obj = pojoGetAllDonateandSellerInformations.get(position);
         holder.tvHomeName.setText(obj.getName());
         holder.tvHomeProductName.setText(obj.getProduct_name());
         holder.tvHomeCategoryName.setText(obj.getProduct_cat());
-
         if (obj.getRole().equals("Doner")) {
             holder.tvHomeRole.setTextColor(Color.GREEN);
             holder.tvHomeRole.setText(obj.getRole());
@@ -88,13 +73,11 @@ public class AdapterGetAllDonateandSellerInformation extends BaseAdapter
             holder.tvHomeRole.setTextColor(Color.RED);
             holder.tvHomeRole.setText(obj.getRole());
         }
-
         Glide.with(activity)
                 .load(Urls.image +obj.getProduct_image())
                 .skipMemoryCache(true)
                 .error(R.drawable.image_not_found)
                 .into(holder.ivProductHomeCategoryImage);
-
         holder.btnAllDonateandSellerInformationViewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,14 +98,12 @@ public class AdapterGetAllDonateandSellerInformation extends BaseAdapter
                 activity.startActivity(intent1);
             }
         });
-
         return view;
     }
     class  ViewHolder
     {
         ImageView ivProductHomeCategoryImage;
         TextView tvHomeRole, tvHomeName,tvHomeCategoryName,tvHomeProductName;
-
         Button btnAllDonateandSellerInformationViewDetails;
     }
 }

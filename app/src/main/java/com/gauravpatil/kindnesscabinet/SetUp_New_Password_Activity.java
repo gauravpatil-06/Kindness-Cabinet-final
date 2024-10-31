@@ -1,42 +1,32 @@
 package com.gauravpatil.kindnesscabinet;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-
 import com.gauravpatil.kindnesscabinet.Comman.Urls;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import cz.msebera.android.httpclient.Header;
-
 public class SetUp_New_Password_Activity extends AppCompatActivity {
     EditText etNewPassword,etConfirmPassword;
     AppCompatButton btnSetPassword;
     String strMobileNo;
     ProgressDialog progressDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_up_new_password);
-
         etNewPassword = findViewById(R.id.etSetUpNewPasswordNewPassword);
         etConfirmPassword = findViewById(R.id.etSetUpNewPasswordConfirmPassword);
         btnSetPassword = findViewById(R.id.btnSetUpNewPasswordSetPassword);
-
         strMobileNo = getIntent().getStringExtra("mobileno");
-
         btnSetPassword.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -57,21 +47,17 @@ public class SetUp_New_Password_Activity extends AppCompatActivity {
                     progressDialog.setMessage("Please Wait...");
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.show();
-
                     forgetPassword();
                 }
             }
         });
     }
-
     private void forgetPassword()
     {
         AsyncHttpClient client = new AsyncHttpClient(); // Client server Communication
         RequestParams params = new RequestParams();     // Put Data
-
         params.put("mobileno",strMobileNo);
         params.put("password",etNewPassword.getText().toString());
-
         client.post(Urls.forgetpassword,params,
                 new JsonHttpResponseHandler()
                 {

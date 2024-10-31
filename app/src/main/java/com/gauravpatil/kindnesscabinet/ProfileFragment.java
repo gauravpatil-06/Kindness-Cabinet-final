@@ -1,5 +1,4 @@
 package com.gauravpatil.kindnesscabinet;
-
 import static android.app.Activity.RESULT_OK;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -30,7 +29,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import cz.msebera.android.httpclient.Header;
 import de.hdodenhof.circleimageview.CircleImageView;
-
 public class ProfileFragment extends Fragment {
     CircleImageView civProfilePhoto;
     EditText etName, etMobileNo, etEmailid, etAddress,
@@ -42,15 +40,12 @@ public class ProfileFragment extends Fragment {
     String strusername;
     private int PICK_IMAGE_REQUEST = 1;
     Bitmap bitmap;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
         civProfilePhoto = view.findViewById(R.id.civProfilePhoto);
         // Make the profile image clickable for selecting a new image.
         civProfilePhoto.setOnClickListener(v -> showFileChooser());
-
         etName = view.findViewById(R.id.etProfileName);
         etMobileNo = view.findViewById(R.id.etProfileMobileNo);
         etEmailid = view.findViewById(R.id.etProfileEmailId);
@@ -59,24 +54,19 @@ public class ProfileFragment extends Fragment {
         etAddress = view.findViewById(R.id.etProfileAddress);
         etUsername = view.findViewById(R.id.etProfileUsername);
         btnSaveChanges = view.findViewById(R.id.btnProfileSaveChanges);
-
         preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         editor = preferences.edit();
         // Retrieve the username (set during login)
         strusername = preferences.getString("username", "");
-
         btnSaveChanges.setOnClickListener(v -> saveProfileData());
-
         return view;
     }
-
     private void showFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -94,7 +84,6 @@ public class ProfileFragment extends Fragment {
             }
         }
     }
-
     // Encode a Bitmap into a Base64 string.
     private String encodeImage(Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -102,13 +91,11 @@ public class ProfileFragment extends Fragment {
         byte[] b = baos.toByteArray();
         return Base64.encodeToString(b, Base64.DEFAULT);
     }
-
     // Decode a Base64 string into a Bitmap.
     private Bitmap decodeImage(String encodedImage) {
         byte[] b = Base64.decode(encodedImage, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(b, 0, b.length);
     }
-
     // Save text profile data into SharedPreferences.
     private void saveProfileData() {
         editor.putString("name", etName.getText().toString());
@@ -121,7 +108,6 @@ public class ProfileFragment extends Fragment {
         editor.apply();
         Toast.makeText(getActivity(), "Profile Updated", Toast.LENGTH_SHORT).show();
     }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -132,7 +118,6 @@ public class ProfileFragment extends Fragment {
         progressDialog.show();
         getMydetails();
     }
-
     // Retrieve text profile details from the database (using your API).
     // If the database returns an image for this username, that image is displayed.
     // Otherwise, the image stored in SharedPreferences for that username is used.
@@ -141,7 +126,6 @@ public class ProfileFragment extends Fragment {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("username", strusername);
-
         client.post(Urls.myDetails, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -157,7 +141,6 @@ public class ProfileFragment extends Fragment {
                         etAge.setText(jsonObject.getString("age"));
                         etAddress.setText(jsonObject.getString("address"));
                         etUsername.setText(jsonObject.getString("username"));
-
                         // Check if the database provides an image manually set for the user.
                         String dbImage = jsonObject.getString("image");
                         if (dbImage != null && !dbImage.trim().isEmpty()) {
@@ -184,7 +167,6 @@ public class ProfileFragment extends Fragment {
                 }
                 progressDialog.dismiss();
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 if (getActivity() != null) {

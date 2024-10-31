@@ -6,12 +6,10 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <!-- Main Layout -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <!-- Toolbar -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -20,16 +18,13 @@
             android:background="#4E82D3"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
         <!-- Fragment Container -->
-
         <FrameLayout
             android:id="@+id/homeFrameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
             android:layout_above="@+id/homeBottomNav"/>
-
         <!-- Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/homeBottomNav"
@@ -44,7 +39,6 @@
             app:itemIconSize="30sp"
             app:itemPaddingBottom="15sp"/>
 </RelativeLayout>
-
     <!-- Navigation Drawer -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -57,5 +51,4 @@
         android:layout_margin="10dp"
         app:itemTextAppearanceActiveBoldEnabled="true"
         app:headerLayout="@layout/nav_header"/>
-
 </androidx.drawerlayout.widget.DrawerLayout>

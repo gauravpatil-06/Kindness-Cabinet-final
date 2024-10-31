@@ -1,5 +1,4 @@
 package com.gauravpatil.kindnesscabinet.AddDonateorSell;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,11 +18,9 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
@@ -37,19 +34,15 @@ import com.gauravpatil.kindnesscabinet.Comman.Urls;
 import com.gauravpatil.kindnesscabinet.Comman.VolleyMultipartRequest;
 import com.gauravpatil.kindnesscabinet.HomeActivity;
 import com.gauravpatil.kindnesscabinet.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 public class SellerActivity extends AppCompatActivity {
-
     Spinner spinner_product_category,spinner_pickup_option;
     EditText et_seller_product_name_title, et_seller_paid_status_title,
             et_seller_productrating_title, et_seller_quantity_title,
@@ -65,17 +58,13 @@ public class SellerActivity extends AppCompatActivity {
     private Bitmap bitmap;
     ImageView img_upload_profile;
     private Uri filePath;
-
     ArrayList<String> arrayIdList, arrayProductCategoryName;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller);
-
         preferences = PreferenceManager.getDefaultSharedPreferences(SellerActivity.this);
         editor= preferences.edit();
-
         spinner_product_category = findViewById(R.id.spinner_select_product_category);
         et_seller_product_name_title = findViewById(R.id.et_seller_product_name_title);
         et_seller_paid_status_title = findViewById(R.id.et_seller_paid_status_title);
@@ -88,13 +77,9 @@ public class SellerActivity extends AppCompatActivity {
         btnsellerSaveChanges = findViewById(R.id.btn_sellerAll_Details);
         btn_seller_image_title = findViewById(R.id.btn_seller_image_title);
         et_seller_product_image_title = findViewById(R.id.et_seller_product_image_title);
-
-
         arrayIdList = new ArrayList<>();
         arrayProductCategoryName = new ArrayList<>();
         getProductCategory();
-
-
         //READ_EXTERNAL_STORAGE PERMISSION
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -102,7 +87,6 @@ public class SellerActivity extends AppCompatActivity {
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
             }
         }
-
         //for  show a file chooser
         btn_seller_image_title.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +94,6 @@ public class SellerActivity extends AppCompatActivity {
                 showFileChooser();
             }
         });
-
         btnsellerSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,9 +122,7 @@ public class SellerActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -153,7 +134,6 @@ public class SellerActivity extends AppCompatActivity {
             }
         }
     }
-
     //choose the image for external storage
     private void showFileChooser() {
         Intent intent = new Intent();
@@ -161,7 +141,6 @@ public class SellerActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
-
     //set selected image into imageview
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -176,13 +155,11 @@ public class SellerActivity extends AppCompatActivity {
             }
         }
     }
-
     private void getProductCategory() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.getAllCategoryDetails,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         // Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject obj = new JSONObject(response);
@@ -190,29 +167,22 @@ public class SellerActivity extends AppCompatActivity {
                             arrayProductCategoryName.clear();
                             arrayIdList.add("-1");
                             arrayProductCategoryName.add("Select Product Category");
-
                             //now looping through all the elements of the json array
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 //getting the json object of the particular index inside the array
                                 JSONObject getlistObject = jsonArray.getJSONObject(i);
-
                                 String categoryname = getlistObject.getString("catagoryname");
                                 arrayProductCategoryName.add(categoryname);
-
-
                             }
-
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(SellerActivity.this
                                     ,android.R.layout.simple_spinner_item, arrayProductCategoryName);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinner_product_category.setAdapter(adapter);
                             spinner_product_category.setVisibility(View.VISIBLE);
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(SellerActivity.this, "Shop Service Exception" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -227,23 +197,18 @@ public class SellerActivity extends AppCompatActivity {
                 return params;
             }
         };
-
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
         RequestQueue requestQueue = Volley.newRequestQueue(SellerActivity.this);
         requestQueue.add(stringRequest);
     }
-
-
     private void doner_seller_tbl() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.getDonerSalerCategoryDetails,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         try {
                             JSONObject obj = new JSONObject(response);
                             String success = obj.getString("Success");
-
                             if (success.equals("1"))
                             {
                                 uploadBitmap(bitmap, obj.getInt("lastinsertedid"));
@@ -252,11 +217,9 @@ public class SellerActivity extends AppCompatActivity {
                                 Toast.makeText(SellerActivity.this, response,Toast.LENGTH_SHORT).show();
 //                                progressDialog.dismiss();
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -281,16 +244,12 @@ public class SellerActivity extends AppCompatActivity {
                 params.put("pickup_option", spinner_product_category.getSelectedItem().toString());
                 params.put("role", et_seller_type_title.getText().toString());
                 return params;
-
             }
         };
-
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
         RequestQueue requestQueue = Volley.newRequestQueue(SellerActivity.this);
         requestQueue.add(stringRequest);
     }
-
-
     private void uploadBitmap(final Bitmap bitmap,final int lastinsertedid) {
         //getting the tag from the edittext
         //our custom volley request
@@ -321,7 +280,6 @@ public class SellerActivity extends AppCompatActivity {
                 params.put("tags",""+ lastinsertedid);
                 return params;
             }
-
             /*
              * Here we are passing image by renaming it with a unique name
              * */
@@ -333,18 +291,14 @@ public class SellerActivity extends AppCompatActivity {
                 return params;
             }
         };
-
         //adding the request to volley
         Volley.newRequestQueue(this).add(volleyMultipartRequest);
-
     }
-
     public byte[] getFileDataFromDrawable(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

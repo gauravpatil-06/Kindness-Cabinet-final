@@ -4,21 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Feedback.Feedback_Activity">
-
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progress"
         android:layout_centerInParent="true"
         android:visibility="gone"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@+id/progress"
         android:layout_marginTop="120dp">
-
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,9 +29,7 @@
             android:textStyle="bold"
             android:layout_marginRight="20dp"
             android:padding="16dp"/>
-
         <requestFocus />
-
         <TextView
             android:id="@+id/txt_feedback"
             android:layout_width="match_parent"
@@ -48,7 +43,6 @@
             android:textColor="@color/white"
             android:textSize="18dp"
             android:textStyle="bold" />
-
         <EditText
             android:layout_width="match_parent"
             android:layout_height="150dp"
@@ -64,7 +58,6 @@
             android:textStyle="bold"
             android:textSize="18dp"
             android:background="@drawable/et_shape"/>
-
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="200dp"
             android:layout_height="50dp"
@@ -78,14 +71,11 @@
             android:textStyle="bold"
             android:layout_marginBottom="10dp"
             android:background="@drawable/btn_bg_shape"/>
-
     </LinearLayout>
-
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progress1"
         android:layout_centerInParent="true"
         android:visibility="gone"/>
-
 </RelativeLayout>
